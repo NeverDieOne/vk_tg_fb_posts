@@ -2,6 +2,7 @@ import vk_api
 from dotenv import load_dotenv
 import os
 import settings
+import telegram
 
 
 load_dotenv()
@@ -23,3 +24,12 @@ def vk_post(photo, message):
     photo = upload.photo(photo, album_id=album_id, group_id=group_id)
 
     vk.wall.post(message=message, owner_id=owner_id, attachments=f'photo{owner_id}_{photo[0]["id"]}')
+
+
+def tg_post(photo, message):
+    # TODO https://www.iguides.ru/blogs/leghko/long-text-image-at-the-bottom-manual/
+    chat_id = settings.tg_settings['chat_id']
+
+    bot = telegram.Bot(token=os.getenv('TG_TOKEN'))
+    bot.send_message(chat_id=chat_id, text=message)
+    bot.send_photo(chat_id=chat_id, photo=open(photo, 'rb'))

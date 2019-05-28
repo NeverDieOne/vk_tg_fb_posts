@@ -4,3 +4,11 @@ vk_settings = {
     'album_id': 263710080,
     'owner_id': -182831911
 }
+
+tg_settings = {
+    'chat_id': '@prog4you'
+}
+
+fb_settings = {
+
+}
