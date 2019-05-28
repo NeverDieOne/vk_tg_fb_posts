@@ -10,5 +10,5 @@ tg_settings = {
 }
 
 fb_settings = {
-
+    'group_id': ''
 }

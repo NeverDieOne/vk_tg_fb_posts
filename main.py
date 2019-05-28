@@ -3,9 +3,7 @@ from dotenv import load_dotenv
 import os
 import settings
 import telegram
-
-
-load_dotenv()
+import requests
 
 PHOTO = '/Users/neverdie/Pictures/1.jpg'
 MESSAGE = 'First post in my life'
@@ -33,3 +31,11 @@ def tg_post(photo, message):
     bot = telegram.Bot(token=os.getenv('TG_TOKEN'))
     bot.send_message(chat_id=chat_id, text=message)
     bot.send_photo(chat_id=chat_id, photo=open(photo, 'rb'))
+
+
+def fb_post(photo=None, message=None):
+    pass
+
+
+if __name__ == '__main__':
+    load_dotenv()
