@@ -4,9 +4,7 @@ import os
 import settings
 import telegram
 import requests
-
-PHOTO = '/Users/neverdie/Pictures/1.jpg'
-MESSAGE = 'First post in my life'
+import argparse
 
 
 def vk_post(photo, message):
@@ -48,3 +46,12 @@ def fb_post(photo, message):
 
 if __name__ == '__main__':
     load_dotenv()
+
+    parser = argparse.ArgumentParser(description='Post in TG, FB, VK')
+    parser.add_argument('photo', help='Path to photo')
+    parser.add_argument('text', help='Text for post')
+    args = parser.parse_args()
+
+    vk_post(args.photo, args.text)
+    tg_post(args.photo, args.text)
+    fb_post(args.photo, args.text)
