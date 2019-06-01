@@ -33,8 +33,17 @@ def tg_post(photo, message):
     bot.send_photo(chat_id=chat_id, photo=open(photo, 'rb'))
 
 
-def fb_post(photo=None, message=None):
-    pass
+def fb_post(photo, message):
+    base_url = 'https://graph.facebook.com/'
+    group_id = settings.fb_settings['group_id']
+
+    data = {
+        'access_token': os.getenv('FB_TOKEN'),
+        'caption': message,
+    }
+    files = {'upload_file': open(photo, 'rb')}
+
+    requests.post(f'{base_url}{group_id}/photos', files=files, data=data)
 
 
 if __name__ == '__main__':
