@@ -27,7 +27,9 @@ def tg_post(photo, message):
 
     bot = telegram.Bot(token=os.getenv('TG_TOKEN'))
     bot.send_message(chat_id=chat_id, text=message)
-    bot.send_photo(chat_id=chat_id, photo=open(photo, 'rb'))
+
+    with open(photo, 'rb') as _file:
+        bot.send_photo(chat_id=chat_id, photo=_file)
 
 
 def fb_post(photo, message):
