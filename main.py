@@ -1,17 +1,16 @@
 import vk_api
 from dotenv import load_dotenv
 import os
-import settings
 import telegram
 import requests
 import argparse
 
 
 def vk_post(photo, message):
-    group_id = settings.vk_settings['group_id']
-    app_id = settings.vk_settings['app_id']
-    album_id = settings.vk_settings['album_id']
-    owner_id = settings.vk_settings['owner_id']
+    group_id = os.getenv('VK_GROUP_ID')
+    app_id = os.getenv('VK_APP_ID')
+    album_id = os.getenv('VK_ALBUM_ID')
+    owner_id = os.getenv('VK_OWNER_ID')
 
     vk_session = vk_api.VkApi(token=os.getenv('VK_ACCESS_TOKEN'), api_version='5.95', app_id=app_id)
     vk = vk_session.get_api()
@@ -24,7 +23,7 @@ def vk_post(photo, message):
 
 def tg_post(photo, message):
     # TODO https://www.iguides.ru/blogs/leghko/long-text-image-at-the-bottom-manual/
-    chat_id = settings.tg_settings['chat_id']
+    chat_id = os.getenv('TG_CHAT_ID')
 
     bot = telegram.Bot(token=os.getenv('TG_TOKEN'))
     bot.send_message(chat_id=chat_id, text=message)
@@ -33,7 +32,7 @@ def tg_post(photo, message):
 
 def fb_post(photo, message):
     base_url = 'https://graph.facebook.com/'
-    group_id = settings.fb_settings['group_id']
+    group_id = os.getenv('FB_GROUP_ID')
 
     data = {
         'access_token': os.getenv('FB_TOKEN'),
