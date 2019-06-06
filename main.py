@@ -39,7 +39,9 @@ def fb_post(photo, message):
         'access_token': os.getenv('FB_TOKEN'),
         'caption': message,
     }
-    files = {'upload_file': open(photo, 'rb')}
+
+    with open(photo, 'rb') as _file:
+        files = {'upload_file': _file}
 
     response = requests.post(f'{base_url}{group_id}/photos', files=files, data=data)
     response.raise_for_status()
