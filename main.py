@@ -41,7 +41,8 @@ def fb_post(photo, message):
     }
     files = {'upload_file': open(photo, 'rb')}
 
-    requests.post(f'{base_url}{group_id}/photos', files=files, data=data)
+    response = requests.post(f'{base_url}{group_id}/photos', files=files, data=data)
+    response.raise_for_status()
 
 
 if __name__ == '__main__':
